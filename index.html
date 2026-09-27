@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11100e">
+<title>Chai-K Café — Where Every Sip Has a Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<style>
+:root{--ink:#11100e;--cream:#f5efe3;--paper:#fbf8f1;--gold:#c49343;--muted:#7d7469;--line:#ded4c4;--green:#183a32}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
+.cursor{position:fixed;width:22px;height:22px;border:1px solid rgba(255,255,255,.8);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);display:none}
+@media(pointer:fine){.cursor{display:block}}
+nav{position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px 5vw;color:#fff;mix-blend-mode:normal;background:linear-gradient(#0008,transparent)}
+.logo{font-family:"Cormorant Garamond";font-size:30px;font-weight:700;letter-spacing:.08em}.logo span{color:#e2b867}
+.navlinks{display:flex;gap:28px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}.navlinks a{opacity:.9}.navlinks a:hover{color:#e2b867}
+.nav-actions{display:flex;gap:10px}.iconbtn{border:1px solid #ffffff55;background:#ffffff12;color:#fff;border-radius:999px;width:42px;height:42px;display:grid;place-items:center;backdrop-filter:blur(12px)}
+.hero{min-height:100svh;position:relative;overflow:hidden;background:#0d100f}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#050606d9 0%,#05060680 40%,#05060615 100%),url("/cafe.jpg") center/cover;transform:scale(1.04)}
+.hero-content{position:relative;z-index:2;min-height:100svh;display:flex;align-items:flex-end;padding:0 7vw 10vh;color:#fff}
+.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#e2b867;margin-bottom:16px}
+h1{font-family:"Cormorant Garamond";font-size:clamp(64px,11vw,150px);line-height:.78;margin:0;max-width:900px;font-weight:600;letter-spacing:-.04em}
+.hero-copy{max-width:570px;margin-top:30px;color:#eee;line-height:1.7;font-size:15px}.cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:#e6bc70;color:#1b150d;padding:15px 21px;border-radius:999px;font-weight:700;border:0}
+.hero-scroll{position:absolute;right:5vw;bottom:42px;color:#fff9;writing-mode:vertical-rl;font-size:10px;letter-spacing:.2em}
+.section{padding:110px 7vw}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:44px}.section-kicker{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:11px}.section h2{font-family:"Cormorant Garamond";font-size:clamp(48px,7vw,92px);line-height:.9;margin:12px 0 0;font-weight:600}.section-head p{max-width:400px;color:var(--muted);line-height:1.7}
+.menu-tabs{display:flex;gap:10px;overflow:auto;padding-bottom:16px;margin-bottom:28px}.tab{white-space:nowrap;padding:10px 17px;border:1px solid var(--line);background:transparent;border-radius:999px}.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #e5ded1;border-radius:24px;overflow:hidden;position:relative;transition:.4s}.card:hover{transform:translateY(-7px);box-shadow:0 24px 60px #2a201214}.foodimg{height:280px;width:100%;object-fit:cover;display:block}.cardbody{padding:20px}.cardtop{display:flex;justify-content:space-between;gap:12px}.card h3{font-family:"Cormorant Garamond";font-size:30px;margin:0}.price{font-weight:700}.desc{color:var(--muted);font-size:13px;line-height:1.6;min-height:42px}.add{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--cream);display:grid;place-items:center;margin-left:auto}
+.story{background:var(--ink);color:#fff;position:relative;overflow:hidden}.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.story h2{max-width:650px}.story p{color:#bcb5aa;line-height:1.9;max-width:570px}.quote{font-family:"Cormorant Garamond";font-size:30px;color:#e6bc70;line-height:1.2;margin-top:30px}.photo-frame{border-radius:35px;overflow:hidden;transform:rotate(2deg);box-shadow:0 40px 100px #000}.photo-frame img{width:100%;display:block}
+.marquee{overflow:hidden;border-top:1px solid #ffffff22;border-bottom:1px solid #ffffff22;padding:18px 0;white-space:nowrap}.marquee-inner{display:inline-block;font-family:"Cormorant Garamond";font-size:44px;color:#fff;animation:marquee 22s linear infinite}@keyframes marquee{to{transform:translateX(-50%)}}
+footer{background:#0a0908;color:#fff;padding:55px 7vw;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}.muted{color:#898278}.footer-title{font-family:"Cormorant Garamond";font-size:42px}
+.cart-panel{position:fixed;z-index:100;right:0;top:0;bottom:0;width:min(440px,100%);background:#fff;transform:translateX(105%);transition:.45s cubic-bezier(.77,0,.18,1);box-shadow:-30px 0 80px #0002;display:flex;flex-direction:column}.cart-panel.open{transform:none}.cart-head{padding:25px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.cart-list{flex:1;overflow:auto;padding:20px}.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.cart-item img{width:70px;height:70px;object-fit:cover;border-radius:13px}.qty{display:flex;gap:8px;align-items:center;margin-top:8px}.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff}.cart-foot{padding:20px;border-top:1px solid var(--line)}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:700;margin-bottom:15px}.primary{width:100%;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:15px;font-weight:700}
+.modal{position:fixed;z-index:200;inset:0;background:#0008;display:none;place-items:center;padding:20px}.modal.show{display:grid}.modalbox{background:#fff;width:min(460px,100%);border-radius:24px;padding:28px;max-height:90vh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{font-family:"Cormorant Garamond";font-size:42px;margin:0}.field{margin:12px 0}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;margin-top:6px;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff}.switch{display:flex;gap:8px;margin:16px 0}.switch button{flex:1;border:1px solid var(--line);background:#fff;padding:11px;border-radius:10px}.switch .active{background:var(--ink);color:#fff}
+.admin{min-height:100svh;background:#f3eee5;padding:100px 5vw 60px}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0 30px}.stat{background:#fff;border:1px solid var(--line);padding:22px;border-radius:20px}.stat small{color:var(--muted)}.stat b{display:block;font-size:32px;margin-top:8px}.orders{display:grid;gap:12px}.order{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px}.order-top{display:flex;justify-content:space-between;gap:10px}.badge{font-size:11px;padding:7px 10px;border-radius:999px;background:#eee7dc}.order-items{color:var(--muted);font-size:13px;line-height:1.7;margin:12px 0}.status-select{padding:9px;border-radius:10px;border:1px solid var(--line)}
+.toast{position:fixed;z-index:500;left:50%;bottom:25px;transform:translate(-50%,120px);background:#111;color:#fff;padding:13px 18px;border-radius:999px;transition:.3s}.toast.show{transform:translate(-50%,0)}
+@media(max-width:800px){nav{padding:16px 5vw}.navlinks{display:none}.hero-content{padding:0 6vw 9vh}.hero:before{background:linear-gradient(90deg,#050606d8,#05060648),url("/cafe.jpg") 63% center/cover}.grid{grid-template-columns:1fr}.section{padding:80px 6vw}.section-head{display:block}.section-head p{margin-top:25px}.story-grid{grid-template-columns:1fr;gap:45px}.photo-frame{order:-1}.foodimg{height:250px}.admin-grid{grid-template-columns:1fr}.admin{padding:90px 5vw 40px}}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<nav>
+  <a class="logo" href="#home">chai<span>-K</span></a>
+  <div class="navlinks"><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a></div>
+  <div class="nav-actions">
+    <button class="iconbtn" onclick="openAuth()"><i data-lucide="user-round"></i></button>
+    <button class="iconbtn" onclick="openCart()"><i data-lucide="shopping-bag"></i><span id="cartCount" style="position:absolute;background:#e6bc70;color:#111;border-radius:50%;font-size:10px;width:17px;height:17px;display:grid;place-items:center;margin:-28px 0 0 27px">0</span></button>
+  </div>
+</nav>
+
+<main id="site">
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div>
+      <div class="eyebrow hero-anim">A little café. A lot of character.</div>
+      <h1 class="hero-anim">Sip.<br>Slowly.</h1>
+      <p class="hero-copy hero-anim">A warm corner for strong chai, slow conversations, comfort food and those evenings you don't want to end.</p>
+      <a class="cta hero-anim" href="#menu">Explore the menu <i data-lucide="arrow-down-right"></i></a>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL TO DISCOVER ↓</div>
+</section>
+
+<section class="section" id="menu">
+  <div class="section-head">
+    <div><div class="section-kicker">The menu</div><h2>Made to<br>be remembered.</h2></div>
+    <p>From cutting chai to indulgent desserts, browse the menu, choose your table and send the order straight to our counter.</p>
+  </div>
+  <div class="menu-tabs" id="tabs"></div>
+  <div class="grid" id="menuGrid"></div>
+</section>
+
+<section class="section story" id="story">
+  <div class="story-grid">
+    <div>
+      <div class="section-kicker">Our little world</div>
+      <h2>200 years of heritage.<br>One modern cup.</h2>
+      <p>Chai-K takes inspiration from old-school Indian café culture and gives it a contemporary place to meet, eat and linger. The visual language follows the café's bold signboard, warm lights and handmade character.</p>
+      <div class="quote">“Good chai. Good company. No rush.”</div>
+    </div>
+    <div class="photo-frame"><img src="/cafe.jpg" alt="Chai-K Cafe"></div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="marquee"><div class="marquee-inner">CHAI • COFFEE • CONVERSATIONS • CHAI • COFFEE • CONVERSATIONS • </div></div>
+  <div class="section" id="visit" style="padding-top:75px;padding-bottom:75px">
+    <div class="section-head">
+      <div><div class="section-kicker">Come by</div><h2>See you at<br>Chai-K.</h2></div>
+      <p>Pick your table when you order online. Your order will appear instantly in the café dashboard so the team knows exactly where it belongs.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div><div class="footer-title">chai-K</div><div class="muted">Tea, food & conversations.</div></div><div class="muted">Open daily · 8 AM — 11 PM<br>© 2026 Chai-K Café</div></footer>
+
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-head"><strong>Your order</strong><button class="iconbtn" style="color:#111;border-color:var(--line)" onclick="closeCart()"><i data-lucide="x"></i></button></div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-foot"><div class="total"><span>Total</span><span id="cartTotal">₹0</span></div><button class="primary" onclick="checkout()">Proceed to order</button></div>
+</aside>
+
+<div class="modal" id="authModal">
+ <div class="modalbox">
+  <div class="modalhead"><h2 id="authTitle">Welcome back.</h2><button class="iconbtn" style="color:#111;border-color:var(--line)" onclick="closeAuth()"><i data-lucide="x"></i></button></div>
+  <div class="switch"><button id="loginSwitch" class="active" onclick="setAuthMode('login')">Login</button><button id="registerSwitch" onclick="setAuthMode('register')">Create account</button></div>
+  <form id="authForm">
+   <div class="field" id="nameField" style="display:none"><label>NAME</label><input id="authName"></div>
+   <div class="field"><label>EMAIL</label><input id="authEmail" type="email" required></div>
+   <div class="field"><label>PASSWORD</label><input id="authPassword" type="password" minlength="6" required></div>
+   <button class="primary" id="authSubmit">Continue</button>
+  </form>
+  <p id="adminHint" class="muted" style="font-size:12px;margin-top:16px">Admin? Use the separate dashboard login.</p>
+ </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+ <div class="modalbox">
+  <div class="modalhead"><h2>Your table.</h2><button class="iconbtn" style="color:#111;border-color:var(--line)" onclick="closeCheckout()"><i data-lucide="x"></i></button></div>
+  <p class="muted">Choose the table number so the café team can bring your order to the right place.</p>
+  <div class="field"><label>TABLE NUMBER</label><select id="tableNo"></select></div>
+  <button class="primary" onclick="placeOrder()">Place order · <span id="checkoutTotal">₹0</span></button>
+ </div>
+</div>
+
+<div class="modal" id="adminModal">
+ <div class="modalbox">
+  <div class="modalhead"><h2>Admin login.</h2><button class="iconbtn" style="color:#111;border-color:var(--line)" onclick="closeAdminLogin()"><i data-lucide="x"></i></button></div>
+  <form id="adminForm">
+   <div class="field"><label>ADMIN EMAIL</label><input id="adminEmail" type="email" value="admin@chaikcafe.com"></div>
+   <div class="field"><label>PASSWORD</label><input id="adminPassword" type="password" value="admin123"></div>
+   <button class="primary">Open dashboard</button>
+  </form>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+let menu=[], cart=JSON.parse(localStorage.getItem("chaiKCart")||"[]"), authMode="login", token=localStorage.getItem("chaiKToken")||"";
+const cafeImage="/cafe.jpg";
+
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
+function money(n){return "₹"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:0})}
+function saveCart(){localStorage.setItem("chaiKCart",JSON.stringify(cart));renderCart()}
+async function api(url,opt={}){const headers={"Content-Type":"application/json",...(opt.headers||{})};if(token)headers.Authorization="Bearer "+token;const r=await fetch(url,{...opt,headers});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"Something went wrong");return d}
+async function loadMenu(){menu=await api("/api/menu");renderTabs("All");renderMenu("All")}
+function renderTabs(active){const cats=["All",...new Set(menu.map(x=>x.category))];$("#tabs").innerHTML=cats.map(c=>`<button class="tab ${c===active?"active":""}" onclick="renderTabs('${c}');renderMenu('${c}')">${c}</button>`).join("")}
+function renderMenu(cat){const list=cat==="All"?menu:menu.filter(x=>x.category===cat);$("#menuGrid").innerHTML=list.map((x,i)=>`
+<article class="card menu-card">
+<img class="foodimg" src="${x.image}" alt="${x.name}" loading="lazy">
+<div class="cardbody"><div class="cardtop"><div><h3>${x.name}</h3><p class="desc">${x.description}</p></div><b class="price">${money(x.price)}</b></div>
+<button class="add" onclick="addToCart(${x.id})"><i data-lucide="plus"></i></button></div></article>`).join("");lucide.createIcons();gsap.from(".menu-card",{y:35,opacity:0,stagger:.06,duration:.55,ease:"power2.out"})}
+function addToCart(id){const x=cart.find(i=>i.id===id);if(x)x.quantity++;else cart.push({id,quantity:1});saveCart();toast("Added to your order")}
+function changeQty(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.quantity+=d;if(x.quantity<=0)cart=cart.filter(i=>i.id!==id);saveCart()}
+function renderCart(){const count=cart.reduce((a,b)=>a+b.quantity,0);$("#cartCount").textContent=count;const detailed=cart.map(i=>({...i,p:menu.find(m=>m.id===i.id)})).filter(i=>i.p);$("#cartList").innerHTML=detailed.length?detailed.map(i=>`<div class="cart-item"><img src="${i.p.image}"><div style="flex:1"><b>${i.p.name}</b><div class="muted">${money(i.p.price)}</div><div class="qty"><button onclick="changeQty(${i.id},-1)">−</button><span>${i.quantity}</span><button onclick="changeQty(${i.id},1)">+</button></div></div><b>${money(i.p.price*i.quantity)}</b></div>`).join(""):`<div class="muted" style="text-align:center;padding:80px 10px">Your table is waiting.<br>Add something delicious.</div>`;const total=detailed.reduce((a,i)=>a+i.p.price*i.quantity,0);$("#cartTotal").textContent=money(total);$("#checkoutTotal").textContent=money(total)}
+function openCart(){$("#cartPanel").classList.add("open");renderCart()}function closeCart(){$("#cartPanel").classList.remove("open")}
+function openAuth(){$("#authModal").classList.add("show")}function closeAuth(){$("#authModal").classList.remove("show")}
+function setAuthMode(m){authMode=m;$("#loginSwitch").classList.toggle("active",m==="login");$("#registerSwitch").classList.toggle("active",m==="register");$("#nameField").style.display=m==="register"?"block":"none";$("#authTitle").textContent=m==="login"?"Welcome back.":"Join the table."}
+$("#authForm").onsubmit=async e=>{e.preventDefault();try{const body={email:$("#authEmail").value,password:$("#authPassword").value};if(authMode==="register")body.name=$("#authName").value;const d=await api("/api/auth/"+authMode,{method:"POST",body:JSON.stringify(body)});token=d.token;localStorage.setItem("chaiKToken",token);localStorage.setItem("chaiKUser",JSON.stringify(d.user));closeAuth();toast("You're in. Welcome to Chai-K.");if(d.user.role==="admin")location.href="/admin.html"}catch(err){toast(err.message)}}
+function checkout(){if(!cart.length)return toast("Add something to your order first.");if(!token){closeCart();openAuth();return}$("#checkoutModal").classList.add("show");$("#tableNo").innerHTML=Array.from({length:30},(_,i)=>`<option>${i+1}</option>`).join("")}
+function closeCheckout(){$("#checkoutModal").classList.remove("show")}
+async function placeOrder(){try{const d=await api("/api/orders",{method:"POST",body:JSON.stringify({tableNo:$("#tableNo").value,items:cart})});cart=[];saveCart();closeCheckout();closeCart();toast("Order #"+d.orderId+" sent to the café.");}catch(err){toast(err.message)}}
+function openAdminLogin(){$("#adminModal").classList.add("show")}function closeAdminLogin(){$("#adminModal").classList.remove("show")}
+$("#adminForm").onsubmit=async e=>{e.preventDefault();try{const d=await api("/api/auth/login",{method:"POST",body:JSON.stringify({email:$("#adminEmail").value,password:$("#adminPassword").value})});if(d.user.role!=="admin")throw Error("This account is not an admin.");localStorage.setItem("chaiKToken",d.token);location.href="/admin.html"}catch(err){toast(err.message)}}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAuth();closeCheckout();closeAdminLogin()}})
+document.addEventListener("mousemove",e=>{const c=document.querySelector(".cursor");if(c){c.style.left=e.clientX+"px";c.style.top=e.clientY+"px"}})
+window.addEventListener("load",()=>{lucide.createIcons();loadMenu().catch(console.error);renderCart();gsap.from(".hero-anim",{y:35,opacity:0,stagger:.12,duration:1.1,ease:"power3.out",delay:.25});});
+</script>
+</body>
+</html>

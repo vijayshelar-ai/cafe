@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chai-K Café — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#11100e;--paper:#f5efe3;--line:#ded4c4;--muted:#7d7469;--gold:#c49343}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}.admin{padding:35px 5vw 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.logo{font:700 40px "Cormorant Garamond"}.logo span{color:var(--gold)}button{font:inherit;cursor:pointer}.logout{border:1px solid var(--line);background:#fff;border-radius:999px;padding:11px 17px}.sub{color:var(--muted);margin-top:4px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:35px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:25px}.stat small{color:var(--muted)}.stat b{font-size:34px;display:block;margin-top:7px}.orders{display:grid;gap:14px}.order{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}.order-top{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.order h3{margin:0;font:700 28px "Cormorant Garamond"}.meta{color:var(--muted);font-size:13px;margin-top:4px}.items{margin:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;color:#5e574f;font-size:14px;line-height:1.8}.bottom{display:flex;justify-content:space-between;align-items:center;gap:15px}.total{font-size:20px;font-weight:700}.status{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px}.empty{padding:70px 20px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:22px}@media(max-width:700px){.stats{grid-template-columns:1fr}.admin{padding:25px 5vw}.bottom{align-items:flex-start;flex-direction:column}.status{width:100%}}
+</style>
+</head>
+<body><main class="admin">
+<div class="top"><div><div class="logo">chai<span>-K</span> / admin</div><div class="sub">Live café order desk · customer + table tracking</div></div><button class="logout" onclick="logout()">Log out</button></div>
+<div class="stats"><div class="stat"><small>TOTAL ORDERS</small><b id="orders">—</b></div><div class="stat"><small>ACTIVE ORDERS</small><b id="active">—</b></div><div class="stat"><small>REVENUE</small><b id="revenue">—</b></div></div>
+<h2>Orders</h2><div id="ordersList" class="orders"></div>
+</main>
+<script>
+const token=localStorage.getItem("chaiKToken");if(!token)location.href="/";
+async function api(url,opt={}){const r=await fetch(url,{...opt,headers:{"Content-Type":"application/json",Authorization:"Bearer "+token}});const d=await r.json().catch(()=>({}));if(!r.ok){if(r.status===401||r.status===403)location.href="/";throw Error(d.error||"Error")}return d}
+const money=n=>"₹"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:0});
+async function load(){const [s,o]=await Promise.all([api("/api/admin/stats"),api("/api/admin/orders")]);document.querySelector("#orders").textContent=s.total_orders;document.querySelector("#active").textContent=s.active_orders;document.querySelector("#revenue").textContent=money(s.revenue);document.querySelector("#ordersList").innerHTML=o.length?o.map(x=>`<article class="order"><div class="order-top"><div><h3>Order #${x.id}</h3><div class="meta"><b>${x.customer_name}</b> · Table ${x.table_no} · ${new Date(x.created_at+"Z").toLocaleString()}</div></div><div class="total">${money(x.total)}</div></div><div class="items">${x.items.map(i=>`${i.quantity} × ${i.name} — ${money(i.price*i.quantity)}`).join("<br>")}</div><div class="bottom"><span class="meta">Customer account order · Table ${x.table_no}</span><select class="status" onchange="setStatus(${x.id},this.value)">${["New","Preparing","Ready","Served","Cancelled"].map(s=>`<option ${s===x.status?"selected":""}>${s}</option>`).join("")}</select></div></article>`).join(""):`<div class="empty">No orders yet. New customer orders will appear here automatically.</div>`}
+async function setStatus(id,status){await api("/api/admin/orders/"+id,{method:"PATCH",body:JSON.stringify({status})});load()}
+function logout(){localStorage.removeItem("chaiKToken");location.href="/"}load();setInterval(load,10000);
+</script>
+</body></html>
